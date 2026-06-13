@@ -1,0 +1,130 @@
+import time
+import sys
+import subprocess 
+
+def menu_principal():
+    print("¡BIENVENIDO AL BOT! 😊")
+    print(" "*30)
+    print("¡Qué se te ofrece hacer el dia de hoy estimado compañero?")
+    print("1. Escuchar musiquita🎶")
+    print("2. Pintar y hacer una obra maestra🎨")
+    print("3. Saber q tanto sabes de cultura general😎")
+    print("4. Jugar un minijuego🎮")
+    print("5. O irte pal carriso y no hablar conmigo")
+    print("="*30)
+
+def seccion_musica():
+    print("\n🎵 --- RINCÓN MUSICAL ---")
+    print("Iniciando el reproductor de música automático...")
+    time.sleep(1)
+    
+    try:
+        subprocess.run([sys.executable, "mus.py"], check=True)
+        print("\n🎵 Regresando al menú del bot...")
+    except FileNotFoundError:
+        print("\n❌ Error: No se encontró el archivo 'mus.py'. Asegúrate de que esté en la misma carpeta.")
+    except subprocess.CalledProcessError:
+        print("\n❌ Hubo un problema al ejecutar 'mus.py'.")
+    
+    time.sleep(1.5)
+
+def seccion_pintar():
+    print("\n🎨 --- ESPACIO DE ARTE ---")
+    print("Abriendo el lienzo de dibujo automático...")
+    time.sleep(1)
+    
+    try:
+        subprocess.run([sys.executable, "Pintar.py"], check=True)
+        print("\n🎨 Regresando al menú del bot...")
+    except FileNotFoundError:
+        print("\n❌ Error: No se encontró el archivo 'Pintar.py'. Asegúrate de que esté en la misma carpeta.")
+    except subprocess.CalledProcessError:
+        print("\n❌ Hubo un problema al ejecutar 'Pintar.py'.")
+    
+    time.sleep(1.5)
+
+def seccion_quiz():
+    print("\n📝 --- RETO DEL QUIZ ---")
+    print("Iniciando el cuestionario de preguntas automático...")
+    time.sleep(1)
+    
+    try:
+        subprocess.run([sys.executable, "quiz.py"], check=True)
+        print("\n📝 Regresando al menú del bot...")
+    except FileNotFoundError:
+        print("\n❌ Error: No se encontró el archivo 'quiz.py'. Asegúrate de que esté en la misma carpeta.")
+    except subprocess.CalledProcessError:
+        print("\n❌ Hubo un problema al ejecutar 'quiz.py'.")
+    
+    time.sleep(1.5)
+
+def submenu_juegos():
+    while True:
+        print("\n🕹️ --- MENÚ DE JUEGOS ---")
+        print("1. 🐍 Snake")
+        print("2. 📝 Examen")
+        print("3. ⚽ Fútbol")
+        print("4. ↩️ Volver al menú principal")
+        print("-"*25)
+        
+        opcion_juego = input("Elige un juego (1-4): ").strip()
+        
+        if opcion_juego == "1":
+            print("\nIniciando Snake...")
+            time.sleep(1)
+            try:
+                subprocess.run([sys.executable, "snake.py"], check=True)
+            except FileNotFoundError:
+                print("❌ Error: No se encontró 'snake.py' en esta carpeta.")
+            except subprocess.CalledProcessError:
+                print("❌ Hubo un problema al ejecutar 'snake.py'.")
+                
+        elif opcion_juego == "2":
+            print("\nIniciando Examen...")
+            time.sleep(1)
+            try:
+                subprocess.run([sys.executable, "examen.py"], check=True)
+            except FileNotFoundError:
+                print("❌ Error: No se encontró 'examen.py' en esta carpeta.")
+            except subprocess.CalledProcessError:
+                print("❌ Hubo un problema al ejecutar 'examen.py'.")
+                
+        elif opcion_juego == "3":
+            print("\nIniciando Fútbol...")
+            time.sleep(1)
+            try:
+                subprocess.run([sys.executable, "fc.py"], check=True)
+            except FileNotFoundError:
+                print("❌ Error: No se encontró 'fc.py' en esta carpeta.")
+            except subprocess.CalledProcessError:
+                print("❌ Hubo un problema al ejecutar 'fc.py'.")
+                
+        elif opcion_juego == "4":
+            print("\nRegresando al menú principal...")
+            break
+        else:
+            print("\n⚠️ Opción no válida. Elige un número del 1 al 4.")
+            time.sleep(1)
+
+def ejecutar_bot():
+    while True:
+        menu_principal()
+        opcion = input("Selecciona una opción (1-5): ").strip()
+        
+        if opcion == "1":
+            seccion_musica()    
+        elif opcion == "2":
+            seccion_pintar()    
+        elif opcion == "3":
+            seccion_quiz()      
+        elif opcion == "4":
+            submenu_juegos()    
+        elif opcion == "5":
+            print("Ush vete y no me hables🙄")
+            break
+        else:
+            print("\n⚠️ Opción no válida. Por favor, elige un número del 1 al 5.")
+            time.sleep(1.5)
+
+if __name__ == "__main__":
+    ejecutar_bot()
